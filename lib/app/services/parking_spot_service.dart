@@ -45,6 +45,35 @@ class ParkingSpotService{
 
   }
 
+  Future<dynamic> fetchDeleteGarage(String id) async {
+    _response = await http.delete(Uri.parse(salvar+"/"+id));
+    if (_response.statusCode == 200 || _response.statusCode == 201) {
+      Map<String, dynamic> retorno = json.decode(_response.body);
+      return ParkingSpotModel.fromJson(retorno) ;
+    } else {
+      return false;
+
+    }
+
+  }
+
+  Future<dynamic> fetchUpdateGarage(ParkingSpotModel garage) async {
+    _response = await http.post(Uri.parse(salvar+"/edit"),body: json.encode(garage.toJson()) ,
+      headers: {
+        "Accept": "application/json",
+        "content-type": "application/json"
+      }
+    );
+    if (_response.statusCode == 200 || _response.statusCode == 201) {
+      Map<String, dynamic> retorno = json.decode(_response.body);
+      return ParkingSpotModel.fromJson(retorno) ;
+    } else {
+      return false;
+
+    }
+
+  }
+
 
 
 

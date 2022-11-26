@@ -20,7 +20,6 @@ class ParkingSpotController extends GetxController {
     return listParkingSpotObs;
   }
 
-
   Future<dynamic> post(ParkingSpotModel objeto)  async {
     isLoading.value = true;
     var list = await parkingSpotService.fetchPostGarage(objeto);
@@ -29,7 +28,20 @@ class ParkingSpotController extends GetxController {
     return list;
   }
 
+  Future<dynamic> delete(String id)  async {
+    isLoading.value = true;
+    var list = await parkingSpotService.fetchDeleteGarage(id);
+    isLoading.value = false;
+    listParkingSpot();
+  }
 
+  Future<dynamic> updateParkingSpot(ParkingSpotModel objeto)  async {
+    isLoading.value = true;
+    var list = await parkingSpotService.fetchUpdateGarage(objeto);
+    isLoading.value = false;
+    update();
+    return list;
+  }
 
 }
 
